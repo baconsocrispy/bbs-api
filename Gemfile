@@ -47,7 +47,7 @@ group :development do
 end
 
 group :development, :production do
- # makes cross-origin AJAX possible with frontend
+ # allow cross-origin AJAX
  gem 'rack-cors'
 end
 
