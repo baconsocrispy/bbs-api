@@ -5,5 +5,6 @@ class CurrentUserController < ApplicationControll:error
 
   # get /admin/current_user
   def index
+    render json: UserSerializer.new(current_user).serializable_hash[:data][:attributes]
   end
 end
