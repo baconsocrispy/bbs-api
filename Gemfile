@@ -56,7 +56,7 @@ group :authentication do
   gem "devise-jwt"
 end
 
-group :api do
-  gem 'jsonapi-serializer'
-end
+
+gem 'jsonapi-serializer'
+
 

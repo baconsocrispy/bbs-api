@@ -1,7 +1,7 @@
-class CurrentUserController < ApplicationController
+class Users::CurrentUserController < ApplicationController
   include AuthenticateUser
   before_action :authenticate_request!
-  respond_to :json
+  # respond_to :json
 
   # get /admin/current_user
   def index
