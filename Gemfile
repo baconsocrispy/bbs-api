@@ -51,3 +51,8 @@ group :development, :production do
  gem 'rack-cors'
 end
 
+group :authentication do
+  gem "devise", "~> 4.8"
+  gem "devise-jwt"
+end
+
