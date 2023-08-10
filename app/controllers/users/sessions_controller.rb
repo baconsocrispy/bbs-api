@@ -1,27 +1,72 @@
 # frozen_string_literal: true
 
 class Users::SessionsController < Devise::SessionsController
-  # before_action :configure_sign_in_params, only: [:create]
+  include RackSessionFix
+  respond_to :json
+  
+  # override default devise create method
+  def create
+    # find user by email
+    @user = User.find_by(email: sign_in_params[:email])
 
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
+    return invalid_email_response unless @user
 
-  # POST /resource/sign_in
-  # def create
-  #   super
-  # end
+    # verify password and log in user
+    if @user.valid_password?(sign_in_params[:password])
+      sign_in :user, @user
+      return sign_in_success_response(@user)
+    else
+      return invalid_password_response
+    end
+  end
 
-  # DELETE /resource/sign_out
-  # def destroy
-  #   super
-  # end
+  private
+  def sign_in_params
+    params.require(:user).permit :email, :password, :password_confirmation
+  end
 
-  # protected
+  # response messages
+  def invalid_email_response
+    render json: {
+      status: {
+        code: 401,
+        message: 'Invalid email or password',
+        errors: 'Invalid email address'
+      }
+    }, status: :unauthorized
+  end
 
-  # If you have extra params to permit, append them to the sanitizer.
-  # def configure_sign_in_params
-  #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
-  # end
+  def invalid_password_response
+    render json: {
+      status: {
+        code: 401,
+        message: 'Invalid email or password',
+        errors: 'Invalid password'
+      }
+    }, status: :unauthorized
+  end
+
+  def sign_in_success_response(user)
+    render json: {
+      status: {
+        code: 200,
+        message: 'User logged in successfully'
+      },
+      jwt: user.jwt
+    }, status: :ok
+  end
+
+  def respond_to_on_destroy
+    if current_user.nil?
+      render json: {
+        status: 200,
+        message: 'User logged out successfully'
+      }, status: :ok
+    else
+      render json: {
+        status: 422,
+        message: 'Something went wrong, session still active'
+      }, status: :unprocessable_entity
+    end
+  end
 end
