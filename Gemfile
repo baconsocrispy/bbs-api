@@ -46,3 +46,8 @@ group :development do
   # gem "spring"
 end
 
+group :development, :production do
+ # makes cross-origin AJAX possible with frontend
+ gem 'rack-cors'
+end
+
