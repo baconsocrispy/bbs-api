@@ -1,4 +1,4 @@
-class CurrentUserController < ApplicationControll:error
+class CurrentUserController < ApplicationController
   include AuthenticateUser
   before_action :authenticate_request!
   respond_to :json
