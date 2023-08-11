@@ -64,6 +64,14 @@ session table).
   end
 ```
 
+Add `:jwt_authenticatable, :jwt_revocation_strategy: self` to User model:
+
+```
+  devise :database_authenticatable, :registerable,
+         :recoverable, :rememberable, :validatable,
+         :jwt_authenticatable, :jwt_revocation_strategy: self
+```
+
 ### Rack Disabled Session Error
 When creating a new session, I was getting a sessions have been disabled error. In order to fix this, I created and included a module that creates a fake rack session. See `rack_session_fix.rb` in concerns.
 
