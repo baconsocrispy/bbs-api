@@ -54,6 +54,7 @@ end
 group :authentication do
   gem "devise", "~> 4.8"
   gem "devise-jwt"
+  gem "doorkeeper"
 end
 
 

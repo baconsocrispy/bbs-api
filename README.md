@@ -75,6 +75,18 @@ Add `:jwt_authenticatable, :jwt_revocation_strategy: self` to User model:
 ### Rack Disabled Session Error
 When creating a new session, I was getting a sessions have been disabled error. In order to fix this, I created and included a module that creates a fake rack session. See `rack_session_fix.rb` in concerns.
 
+### Doorkeeper Setup
+Add gem to authentication group in gemfile:
+`gem 'doorkeeper'`
+
+Install doorkeeper:
+`rails g doorkeeper:install`
+
+Create Doorkeeper migration files
+`rails g doorkeeper:migration`
+
+
+
 ### JSON Serializer
 
 
