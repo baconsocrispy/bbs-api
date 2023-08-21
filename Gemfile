@@ -50,13 +50,13 @@ end
 
 group :authentication do
   gem "devise", "~> 4.8"
-  gem "devise-jwt"
+
+  # oauth2 provider 
+  gem "doorkeeper", "~> 5.6"
 end
 
-# oauth2 provider 
-gem "doorkeeper", "~> 5.6"
+
 
 # serialize models as json
 gem 'jsonapi-serializer'
-
 
