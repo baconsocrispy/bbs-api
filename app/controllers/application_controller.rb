@@ -1,4 +1,6 @@
 class ApplicationController < ActionController::API
+  include ActionController::Cookies
+  
   # doorkeeper
   before_action :doorkeeper_authorize!
   

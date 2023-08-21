@@ -101,8 +101,17 @@ This tells doorkeeper that the password grant type is allowed
 * uncomment `allow_blank_redirect_uri false` and set to `true`
 This corresponds with removing the redirect_uri null false constraint in the migration
 
+* Further development: implement refresh token, scopes
 
+## Cookie Management
+* enable cookies in `config/application.rb`. They are disabled by default in api mode.
+```
+  config.middleware.use ActionDispatch::Cookies
+  config.middleware.use ActionDispatch::Session::CookieStore
+```
+* In `application_controller.rb`, add: ` include ActionController::Cookies`
 
 ## Help
 https://codingitwrong.com/2018/11/02/cookie-based-token-storage-with-doorkeeper.html
 https://curity.io/resources/learn/the-token-handler-pattern/
+https://medium.com/@ArturoAlvarezV/use-session-cookies-to-authenticate-a-user-with-a-rails-api-backend-hosted-in-heroku-on-one-domain-f702ddf8c07
