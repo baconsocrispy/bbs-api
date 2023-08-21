@@ -108,3 +108,23 @@ has_many :access_tokens,
           dependent: :destroy
 ```
 * run migration: `rails db:migrate`
+
+## Initializer Configuration
+* uncomment `api_only` to skip CSRF protections, and respond with json
+* uncomment ` base_controller 'ActionController::Base'` and change to `ActionController::API`
+the base controller will re-add CSRF protections
+* update the authentication method: 
+comment out `resource_owner_authenticator` block and add:
+```
+resource_owner_from_credentials do
+  User.authenticate(params[:email], params[:password])
+end
+```
+This tells doorkeeper to use the email and password provided at login to authenticate the user.
+
+
+
+
+## Help
+https://codingitwrong.com/2018/11/02/cookie-based-token-storage-with-doorkeeper.html
+https://curity.io/resources/learn/the-token-handler-pattern/
