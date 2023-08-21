@@ -80,9 +80,6 @@ Add doorkeeper gem for OAuth security??
 help: https://www.youtube.com/watch?v=Kwm4Edvlqhw
 help: https://curity.io/resources/learn/the-token-handler-pattern/
 
-
-
-
 ### JSON Serializer
 
 
@@ -90,3 +87,24 @@ help: https://curity.io/resources/learn/the-token-handler-pattern/
 https://chriskottom.com/articles/versioning-a-rails-api/
 
 
+### Doorkeeper Setup
+## Basic Installation
+* `bundle add doorkeeper`
+* `bundle install`
+* install doorkeeper: `rails g doorkeeper:install`
+* restart server if you get uninitialized constant error for Doorkeeper
+* generate migration file: `rails g doorkeeper:migration`
+
+## Migration Configuration
+* remove `null: false` from the `redirect_uri` in the oauth_applications block (this is not necessary unless using 3rd party authentication apps like Google to login)
+* comment out the `oauth_access_grants` block and its foreign_keys. This is only if you anticipate user's needing to grant access to 3rd party apps to have read/write access to their app
+* since a Devise user model already exists, add relevant foreign key to oauth_access_token table:
+`add_foreign_key :oauth_access_tokens, :users, column: :resource_owner_id`
+* add corresponding associations to User model.
+```
+has_many :access_tokens,
+          class_name: 'Doorkeeper::AccessToken',
+          foreign_key: :resource_owner_id,
+          dependent: :destroy
+```
+* run migration: `rails db:migrate`
