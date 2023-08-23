@@ -523,4 +523,4 @@ Doorkeeper.configure do
 end
 
 # prepends the cookie configuration logic to the default doorkeeper response
-Doorkeeper::OAuth::TokenResponse.send :prepend, CookieTokenResponse
+Doorkeeper::OAuth::TokenResponse.send :prepend, CookieTokenResponseHelper
