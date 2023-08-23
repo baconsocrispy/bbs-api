@@ -51,6 +51,8 @@ https://chriskottom.com/articles/versioning-a-rails-api/
 
 ### Doorkeeper Setup
 Explain how this follows and doesn't follow OAuth2 protocols using Doorkeeper/Devise.
+
+OAuth2 Authorization Framework: https://datatracker.ietf.org/doc/html/rfc6749
 ## Basic Installation
 * `bundle add doorkeeper`
 * `bundle install`
@@ -131,9 +133,37 @@ include CookieTokenResponse
 
 * On the frontend I needed to set `credentials: 'include'` for the cookie to store properly in the browser in development since the browser (Chrome) treats the different ports as cross-origin. 
 
+* In order to successfully revoke access tokens via cookie (default is to use params), I needed to override the `token` action in the `Doorkeeper::TokensController` with a custom controller per below:
+
+```
+class CookieRevokeController < Doorkeeper::TokensController
+  private
+  # override token implementation to get access token from request.cookies
+  # instead of params['token']
+  def token
+    @token ||=
+      if params[:token_type_hint] == "refresh_token"
+        Doorkeeper.config.access_token_model.by_refresh_token(request.cookies['access_token'])
+      else
+        Doorkeeper.config.access_token_model.by_token(request.cookies['access_token']) ||
+          Doorkeeper.config.access_token_model.by_refresh_token(request.cookies['access_token'])
+      end
+  end
+end
+```
+
 * helpful tutorial: https://codingitwrong.com/2018/11/02/cookie-based-token-storage-with-doorkeeper.html
+* customizing token response: https://github.com/doorkeeper-gem/doorkeeper/wiki/Customizing-Token-Response
+* TokensController default implementation: https://github.com/doorkeeper-gem/doorkeeper/blob/main/app/controllers/doorkeeper/tokens_controller.rb
 
 ## Help
 
 https://curity.io/resources/learn/the-token-handler-pattern/
 https://medium.com/@ArturoAlvarezV/use-session-cookies-to-authenticate-a-user-with-a-rails-api-backend-hosted-in-heroku-on-one-domain-f702ddf8c07
+
+## TO DO
+* Create before_action in CookieTokenResponse to check token presence
+* Add roles
+* install Pry
+* Testing
+* v1 namespacing

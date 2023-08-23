@@ -1,7 +1,16 @@
 module CookieTokenResponse
   # remove access token and access type from response body
   def body
-    super.except('access_token', 'token_type')
+    return if !token
+
+    # add status message to response body
+    status_response = {
+      'status' => '200',
+      'message' => 'Authorization successful'
+    }
+
+    # remove access token from response body
+    super.except('access_token', 'token_type').merge(status_response)
   end
 
   # add cookie to response headers if token present
