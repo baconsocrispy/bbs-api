@@ -156,6 +156,13 @@ end
 * customizing token response: https://github.com/doorkeeper-gem/doorkeeper/wiki/Customizing-Token-Response
 * TokensController default implementation: https://github.com/doorkeeper-gem/doorkeeper/blob/main/app/controllers/doorkeeper/tokens_controller.rb
 
+## Heroku
+* in root folder create a `Procfile` with the rails build command per below:
+`web: bundle exec rails server -e production`
+* login to heroku: `heroku login`
+* create app: `heroku apps:create bbs-api-v1`
+* create postgres database: `heroku addons:create heroku-postgresql:mini`
+
 ## Help
 
 https://curity.io/resources/learn/the-token-handler-pattern/
