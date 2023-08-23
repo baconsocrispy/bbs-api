@@ -1,11 +1,10 @@
 module CookieTokenResponse
-  # override doorkeeper body method to remove access token 
-  # and access type from response
+  # remove access token and access type from response body
   def body
     super.except('access_token', 'token_type')
   end
 
-  # configure headers for doorkeeper response
+  # add cookie to response headers if token present
   def headers
     return if !token
 

@@ -19,6 +19,7 @@ gem to allow CORS.
 * in `config/initializers/cors.rb` uncomment everything and configure resource list appropriateley
 * replace `example.com` with `http://localhost:3000` (in production put the primary domain(s))
 * under resource "*" and under 'headers: any', add 'expose: ['Authorization']'
+* add `credentials: true` to allow cookies in request
 
 * helpful: https://medium.com/ruby-daily/understanding-cors-when-using-ruby-on-rails-as-an-api-f086dc6ffc41
 
@@ -127,6 +128,8 @@ include CookieTokenResponse
 * To get doorkeeper to read the access_token from the cookie, find the access_token_methods section of the doorkeeper initializer and add this underneath:
 
 ` access_token_methods lambda { |request| request.cookies['access_token']}`
+
+* On the frontend I needed to set `credentials: 'include'` for the cookie to store properly in the browser in development since the browser (Chrome) treats the different ports as cross-origin. 
 
 * helpful tutorial: https://codingitwrong.com/2018/11/02/cookie-based-token-storage-with-doorkeeper.html
 
