@@ -1,4 +1,4 @@
-module CookieTokenResponse
+module CookieTokenResponseHelper
   # remove access token and access type from response body
   def body
     return if !token

@@ -2,7 +2,7 @@
 
 # helper configures HttpOnly cookie to send access_token in response
 require './app/helpers/cookie_token_response_helper'
-include CookieTokenResponse
+include CookieTokenResponseHelper
 
 Doorkeeper.configure do
   # Change the ORM that doorkeeper will use (requires ORM extensions installed).

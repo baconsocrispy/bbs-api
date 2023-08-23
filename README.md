@@ -162,6 +162,9 @@ end
 * login to heroku: `heroku login`
 * create app: `heroku apps:create bbs-api-v1`
 * create postgres database: `heroku addons:create heroku-postgresql:mini`
+* I needed to add the x86_64-linux platform to the Gemfile.lock to deploy correctly:
+`bundle lock --add-platform x86_64-linux`
+* push main branch to heroku: `git push heroku main`
 
 ## Help
 
