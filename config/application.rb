@@ -2,7 +2,7 @@ require_relative "boot"
 
 require "rails/all"
 
-# initialize devise/doorkeeper authentication
+# initialize devise/doorkeeper authentication group
 require 'devise'
 require 'doorkeeper'
 

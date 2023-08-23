@@ -1,5 +1,9 @@
 # frozen_string_literal: true
 
+# helper configures HttpOnly cookie to send access_token in response
+require './app/helpers/cookie_token_response_helper'
+include CookieTokenResponse
+
 Doorkeeper.configure do
   # Change the ORM that doorkeeper will use (requires ORM extensions installed).
   # Check the list of supported ORMs here: https://github.com/doorkeeper-gem/doorkeeper#orms
@@ -257,7 +261,7 @@ Doorkeeper.configure do
   # Check out https://github.com/doorkeeper-gem/doorkeeper/wiki/Changing-how-clients-are-authenticated
   # for more information on customization
   #
-  # client_credentials :from_basic, :from_params
+  client_credentials :from_basic
 
   # Change the way access token is authenticated from the request object.
   # By default it retrieves first from the `HTTP_AUTHORIZATION` header, then
@@ -266,6 +270,9 @@ Doorkeeper.configure do
   # for more information on customization
   #
   # access_token_methods :from_bearer_authorization, :from_access_token_param, :from_bearer_param
+  
+  # custom method to access token via httponly cookie
+  access_token_methods lambda { |request| request.cookies['access_token']}
 
   # Forces the usage of the HTTPS protocol in non-native redirect uris (enabled
   # by default in non-development environments). OAuth2 delegates security in
@@ -514,3 +521,6 @@ Doorkeeper.configure do
   #
   # realm "Doorkeeper"
 end
+
+# prepends the cookie configuration logic to the default doorkeeper response
+Doorkeeper::OAuth::TokenResponse.send :prepend, CookieTokenResponse

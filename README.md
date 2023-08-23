@@ -49,6 +49,7 @@ https://chriskottom.com/articles/versioning-a-rails-api/
 
 
 ### Doorkeeper Setup
+Explain how this follows and doesn't follow OAuth2 protocols using Doorkeeper/Devise.
 ## Basic Installation
 * `bundle add doorkeeper`
 * `bundle install`
@@ -81,7 +82,7 @@ resource_owner_from_credentials do
   User.authenticate(params[:email], params[:password])
 end
 ```
-This tells doorkeeper to use the email and password provided at login to authenticate the user.
+This tells doorkeeper to use the email and password provided at login and to authenticate the user with the devise authenticate method.
 
 * Add devise authentication method to User model.
 
@@ -103,15 +104,33 @@ This corresponds with removing the redirect_uri null false constraint in the mig
 
 * Further development: implement refresh token, scopes
 
+* I restricted the way client credentials (client_id, client_secret) are received to just basic auth
+`client_credentials :from_basic`
+
+## Create Client Application
+In Rails console, create an application to generate client_id and client_secret. I called the frontend client application Next.js. Set the Client id, secret, name and grant_type as environment variables.
+
 ## Cookie Management
-* enable cookies in `config/application.rb`. They are disabled by default in api mode.
+* Create a helper to update the default doorkeeper response to send the access_token as an HttpOnly cookie. (see `app/helpers/cookie_token_response_helper.rb` for implementation)
+
+* The helper needs to be required and included in the `doorkeeper.rb` initializer
+
 ```
-  config.middleware.use ActionDispatch::Cookies
-  config.middleware.use ActionDispatch::Session::CookieStore
+require './app/helpers/cookie_token_response_helper'
+include CookieTokenResponse
 ```
-* In `application_controller.rb`, add: ` include ActionController::Cookies`
+
+* And it needs to be prepended to the default Doorkeeper token response outside of the `doorkeeper.config` block.
+
+`Doorkeeper::OAuth::TokenResponse.send :prepend, CookieTokenResponse`
+
+* To get doorkeeper to read the access_token from the cookie, find the access_token_methods section of the doorkeeper initializer and add this underneath:
+
+` access_token_methods lambda { |request| request.cookies['access_token']}`
+
+* helpful tutorial: https://codingitwrong.com/2018/11/02/cookie-based-token-storage-with-doorkeeper.html
 
 ## Help
-https://codingitwrong.com/2018/11/02/cookie-based-token-storage-with-doorkeeper.html
+
 https://curity.io/resources/learn/the-token-handler-pattern/
 https://medium.com/@ArturoAlvarezV/use-session-cookies-to-authenticate-a-user-with-a-rails-api-backend-hosted-in-heroku-on-one-domain-f702ddf8c07
