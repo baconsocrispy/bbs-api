@@ -165,6 +165,10 @@ end
 * I needed to add the x86_64-linux platform to the Gemfile.lock to deploy correctly:
 `bundle lock --add-platform x86_64-linux`
 * push main branch to heroku: `git push heroku main`
+* run db migrations: `heroku run rails db:migrate`
+* seed db: `heroku run rails db:seed`
+* check logs: `heroku logs --tail`
+* Run console: `heroku run rails c`
 
 ## Help
 
