@@ -21,7 +21,8 @@ module CookieTokenResponseHelper
     cookie_args = [
       "access_token=#{ token.token }",
       'Path=/',
-      'HttpOnly'
+      'HttpOnly',
+      'SameSite=None'
     ]
 
     # ensure secure parameter is set in production
