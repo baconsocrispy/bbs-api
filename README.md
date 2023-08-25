@@ -152,6 +152,12 @@ class CookieRevokeController < Doorkeeper::TokensController
 end
 ```
 
+* When front and back end in production were on different domains I needed to add `SameSite=None` for the cookie to set properly in the browser. Remove this when on the same domain.
+
+* Similarly, change `credentials: 'include'` to `credentials: 'same-site'` on the frontend fetch request when using the same domain
+
+* iOS browser apps (Chrome/Safari) are not setting the HttpOnly cookie, likely because the front/back end are on different domains. 
+
 * helpful tutorial: https://codingitwrong.com/2018/11/02/cookie-based-token-storage-with-doorkeeper.html
 * customizing token response: https://github.com/doorkeeper-gem/doorkeeper/wiki/Customizing-Token-Response
 * TokensController default implementation: https://github.com/doorkeeper-gem/doorkeeper/blob/main/app/controllers/doorkeeper/tokens_controller.rb
