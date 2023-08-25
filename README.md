@@ -46,7 +46,11 @@ help: https://curity.io/resources/learn/the-token-handler-pattern/
 
 
 ### Routing/Namespace
-https://chriskottom.com/articles/versioning-a-rails-api/
+* Create v1 namespacing for api routes (see `routes.rb`)
+* Add v1 folders to controllers, serializers, test/controllers
+* Move controllers/serializers into v1 folders
+* Make sure to namespace the controller/serializer classes as well (i.e. `V1::ProductsController`)
+* Helpful: https://chriskottom.com/articles/versioning-a-rails-api/
 
 
 ### Doorkeeper Setup
