@@ -6,12 +6,15 @@ class V1::ProductsController < ApplicationController
   def index
     @products = Product.all
 
-    render json: @products
+    render json: {
+      products: @products.map { |product|
+        serialize_product(product)
+      }}
   end
 
   # GET /products/1
   def show
-    render json: @product
+    render json: serialize_product(@product)
   end
 
   # POST /products
@@ -19,7 +22,7 @@ class V1::ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      render json: @product, status: :created, location: @product
+      render json: serialize_product(@product), status: :created, location: @product
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -28,7 +31,7 @@ class V1::ProductsController < ApplicationController
   # PATCH/PUT /products/1
   def update
     if @product.update(product_params)
-      render json: @product
+      render json: serialize_product(@product)
     else
       render json: @product.errors, status: :unprocessable_entity
     end
@@ -48,5 +51,10 @@ class V1::ProductsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def product_params
       params.require(:product).permit(:name, :short_description)
+    end
+
+    # serialize product
+    def serialize_product(product)
+      ProductSerializer.new(product).serializable_hash[:data][:attributes]
     end
 end
