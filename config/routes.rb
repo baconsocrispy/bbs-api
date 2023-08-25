@@ -6,9 +6,10 @@ Rails.application.routes.draw do
 
   get '/current_user', to: 'users/current_user#current_user'
 
-  # products api
+  # api
   concern :api_base do
     resources :products
+    resources :categories
   end
   
   namespace :v1 do
