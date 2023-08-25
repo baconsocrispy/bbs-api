@@ -28,7 +28,6 @@ module CookieTokenResponseHelper
     # ensure secure parameter is set in production
     if Rails.env.production?
       cookie_args.push('Secure')
-      cookie_args.push('Domain=superlative-fairy-8da059.netlify.app')
     end
 
     # stringify the cookie args
