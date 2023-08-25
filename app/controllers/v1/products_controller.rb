@@ -1,5 +1,5 @@
 class V1::ProductsController < ApplicationController
-  doorkeeper_authorize! except: %i[ index, show ]
+  before_action :doorkeeper_authorize!, except: %i[ index show ]
   before_action :set_product, only: %i[ show update destroy ]
 
   # GET /products
@@ -55,6 +55,6 @@ class V1::ProductsController < ApplicationController
 
     # serialize product
     def serialize_product(product)
-      ProductSerializer.new(product).serializable_hash[:data][:attributes]
+      V1::ProductSerializer.new(product).serializable_hash[:data][:attributes]
     end
 end
