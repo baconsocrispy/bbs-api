@@ -11,7 +11,6 @@ products_csv = CSV.parse(products_csv_text, :headers => true)
 
 def create_or_update_products(csv)
   csv.each do |row|
-    p row[0]
     product = Product.where(:name => row[0])
     if !product.empty?
       product.update!(name: row[0],
@@ -27,3 +26,13 @@ def create_or_update_products(csv)
 end
 
 create_or_update_products(products_csv)
+
+# seed categories
+categories = [ 'architecture', 'production', 'studio' ]
+
+categories.each do |category|
+  cat = Category.find_by(name: category)
+  if !cat
+    Category.create!(name: category)
+  end
+end
