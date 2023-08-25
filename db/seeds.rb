@@ -26,13 +26,3 @@ def create_or_update_products(csv)
 end
 
 create_or_update_products(products_csv)
-
-# seed categories
-categories = [ 'architecture', 'production', 'studio' ]
-
-categories.each do |category|
-  cat = Category.find_by(name: category)
-  if !cat
-    Category.create!(name: category)
-  end
-end
