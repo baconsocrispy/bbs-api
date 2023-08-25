@@ -1,4 +1,5 @@
 class V1::CategoriesController < ApplicationController
+  before_action :doorkeeper_authorize!, except: %i[ index show ]
   before_action :set_category, only: %i[ show update destroy ]
 
   # GET /categories
@@ -10,7 +11,7 @@ class V1::CategoriesController < ApplicationController
 
   # GET /categories/1
   def show
-    render json: @category
+    render json: serialize_category(@category)
   end
 
   # POST /categories
@@ -47,5 +48,10 @@ class V1::CategoriesController < ApplicationController
     # Only allow a list of trusted parameters through.
     def category_params
       params.fetch(:category, {})
+    end
+
+    # serialize response
+    def serialize_category(category)
+      V1::CategorySerializer.new(category).serializable_hash[:data][:attributes]
     end
 end

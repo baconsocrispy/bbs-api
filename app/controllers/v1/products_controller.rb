@@ -9,7 +9,8 @@ class V1::ProductsController < ApplicationController
     render json: {
       products: @products.map { |product|
         serialize_product(product)
-      }}
+      }
+    }
   end
 
   # GET /products/1
