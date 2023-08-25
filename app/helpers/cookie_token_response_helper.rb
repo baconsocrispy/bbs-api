@@ -22,7 +22,7 @@ module CookieTokenResponseHelper
       "access_token=#{ token.token }",
       'Path=/',
       'HttpOnly',
-      'SameSite=Lax'
+      'SameSite=None'
     ]
 
     # ensure secure parameter is set in production
