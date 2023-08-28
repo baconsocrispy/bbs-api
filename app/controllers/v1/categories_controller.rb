@@ -5,7 +5,6 @@ class V1::CategoriesController < ApplicationController
   # GET /categories
   def index
     @categories = Category.all
-
     render json: @categories
   end
 
@@ -40,9 +39,9 @@ class V1::CategoriesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+    # Find and set category by slug
     def set_category
-      @category = Category.find(params[:id])
+      @category = Category.find_by(slug: params[:id])
     end
 
     # Only allow a list of trusted parameters through.

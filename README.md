@@ -42,9 +42,6 @@ When creating a new session, I was getting a sessions have been disabled error. 
 help: https://www.youtube.com/watch?v=Kwm4Edvlqhw
 help: https://curity.io/resources/learn/the-token-handler-pattern/
 
-### JSON Serializer
-
-
 ### Routing/Namespace
 * Create v1 namespacing for api routes (see `routes.rb`)
 * Add v1 folders to controllers, serializers, test/controllers
@@ -52,19 +49,18 @@ help: https://curity.io/resources/learn/the-token-handler-pattern/
 * Make sure to namespace the controller/serializer classes as well (i.e. `V1::ProductsController`)
 * Helpful: https://chriskottom.com/articles/versioning-a-rails-api/
 
-
-### Doorkeeper Setup
+## Doorkeeper Setup
 Explain how this follows and doesn't follow OAuth2 protocols using Doorkeeper/Devise.
 
 OAuth2 Authorization Framework: https://datatracker.ietf.org/doc/html/rfc6749
-## Basic Installation
+### Basic Installation
 * `bundle add doorkeeper`
 * `bundle install`
 * install doorkeeper: `rails g doorkeeper:install`
 * restart server if you get uninitialized constant error for Doorkeeper
 * generate migration file: `rails g doorkeeper:migration`
 
-## Migration Configuration
+### Migration Configuration
 * remove `null: false` from the `redirect_uri` in the oauth_applications block (this is not necessary unless using 3rd party authentication apps like Google to login that send you to another page)
 * comment out the `oauth_access_grants` block and its foreign_keys. This is only if you anticipate user's needing to grant access to 3rd party apps to have read/write access to their app. That's beyond the scope of this application.
 * since a Devise user model already exists, add relevant foreign key to oauth_access_token table:
@@ -78,7 +74,7 @@ has_many :access_tokens,
 ```
 * run migration: `rails db:migrate`
 
-## Initializer Configuration
+### Initializer Configuration
 * uncomment `api_only` to skip CSRF protections, and respond with json
 * uncomment ` base_controller 'ActionController::Base'` and change to `ActionController::API`
 the base controller will re-add CSRF protections
@@ -114,10 +110,10 @@ This corresponds with removing the redirect_uri null false constraint in the mig
 * I restricted the way client credentials (client_id, client_secret) are received to just basic auth
 `client_credentials :from_basic`
 
-## Create Client Application
-In Rails console, create an application to generate client_id and client_secret. I called the frontend client application Next.js. Set the Client id, secret, name and grant_type as environment variables.
+### Create Client Application
+See `seeds.rb` for syntax for creating an application. I called the frontend client application Next.js. Set the Client id, secret, name and grant_type as environment variables on the frontend.
 
-## Cookie Management
+### Cookie Management
 * Create a helper to update the default doorkeeper response to send the access_token as an HttpOnly cookie. (see `app/helpers/cookie_token_response_helper.rb` for implementation)
 
 * The helper needs to be required and included in the `doorkeeper.rb` initializer
@@ -165,6 +161,10 @@ end
 * helpful tutorial: https://codingitwrong.com/2018/11/02/cookie-based-token-storage-with-doorkeeper.html
 * customizing token response: https://github.com/doorkeeper-gem/doorkeeper/wiki/Customizing-Token-Response
 * TokensController default implementation: https://github.com/doorkeeper-gem/doorkeeper/blob/main/app/controllers/doorkeeper/tokens_controller.rb
+
+## Parameters
+* https://hartaniyassir.medium.com/creating-slug-urls-in-rails-without-gems-c693e0eeec8a
+* Add slug to model serializers where necessary
 
 ## Heroku
 * in root folder create a `Procfile` with the rails build command per below:
