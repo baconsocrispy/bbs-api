@@ -21,13 +21,17 @@ module CookieTokenResponseHelper
     cookie_args = [
       "access_token=#{ token.token }",
       'Path=/',
-      'HttpOnly',
-      'SameSite=None'
+      'HttpOnly'
     ]
+
+    if Rails.env.development?
+      cookie_args.push('SameSite=Lax')
+    end
 
     # ensure secure parameter is set in production
     if Rails.env.production?
       cookie_args.push('Secure')
+      cookie_args.push('SameSite=None')
     end
 
     # stringify the cookie args
