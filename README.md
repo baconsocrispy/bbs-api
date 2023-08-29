@@ -180,6 +180,42 @@ end
 * check logs: `heroku logs --tail`
 * Run console: `heroku run rails c`
 
+## AWS
+
+### AWS Setup
+* create an IAM user for the application in AWS and add the access key and secret to the decrypted credentials file
+
+* create an S3 bucket for the application
+
+* add the S3 sdk gem: `bundle add aws-sdk-s3`
+
+* uncomment the amazon configuration in the `config/storage.yml` file
+
+* ensure the region is set to the correct region for the s3 bucket
+
+* change bucket in storage.yml to: `<%= Rails.application.credentials.dig(:aws, :s3_bucket) %>`
+
+* add `s3_bucket` name to credentials (per below)
+
+### Storing Credentials
+
+* Allow editing of Rails credentials file `credentials.yml.enc` with cli command:
+`EDITOR="code --wait" rails credentials:edit`
+This decrypts the file and opens it up for editing in the VS Code editor
+
+* add aws user access key and secret and the s3 bucket name as environment variables
+
+* exiting out of the credentials file will re-encrypt and save it
+
+* test variables work in rails console with: `Rails.application.credentials.aws`
+
+### Active Storage Setup
+* Install via: `rails active_storage:install`
+* Db migrate: `rails db:migrate`
+
+* Rails/AWS Config: https://medium.com/nerd-for-tech/handling-images-part-1-using-active-storage-in-rails-6-with-amazon-s3-buckets-92b739fa790
+* Rails 7 Environment Variables: https://web-crunch.com/posts/the-complete-guide-to-ruby-on-rails-encrypted-credentials
+
 ## Help
 
 https://curity.io/resources/learn/the-token-handler-pattern/

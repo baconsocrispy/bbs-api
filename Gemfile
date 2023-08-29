@@ -58,3 +58,6 @@ end
 
 # serialize models as json
 gem 'jsonapi-serializer'
+
+# aws s3 sdk
+gem "aws-sdk-s3", "~> 1.134"
