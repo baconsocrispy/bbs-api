@@ -4,18 +4,18 @@ class V1::ProductsController < ApplicationController
 
   # GET /products
   def index
-    @products = Product.all
+    @products = Product.all.with_attached_product_images
 
     render json: {
       products: @products.map { |product|
-        serialize_product(product)
-      }
+        serialize_product(product), include: [:product_images]
+      }, status: :ok
     }
   end
 
   # GET /products/1
   def show
-    render json: serialize_product(@product)
+    render json: serialize_product(@product), include: [:product_images]
   end
 
   # POST /products
@@ -51,7 +51,8 @@ class V1::ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product).permit(:name, :short_description)
+      params.require(:product)
+            .permit(:name, :short_description, product_images: [])
     end
 
     # serialize product

@@ -197,6 +197,12 @@ end
 
 * add `s3_bucket` name to credentials (per below)
 
+* in `config/environments/development.rb` and `config/environments/production.rb` set `config.active_storage.service = :amazon` instead of :local
+
+* To prevent active storage from replacing all attached images for a model when updating any one image, add the following line just below `config.active_storage.service = :amazon` in development and production environment files. 
+
+`config.active_storage.replace_on_assign_to_many = false`
+
 ### Storing Credentials
 
 * Allow editing of Rails credentials file `credentials.yml.enc` with cli command:
@@ -212,6 +218,12 @@ This decrypts the file and opens it up for editing in the VS Code editor
 ### Active Storage Setup
 * Install via: `rails active_storage:install`
 * Db migrate: `rails db:migrate`
+
+### Serializer Setup
+* See Product serializer
+
+### Controller Setup 
+* See Product controller
 
 * Rails/AWS Config: https://medium.com/nerd-for-tech/handling-images-part-1-using-active-storage-in-rails-6-with-amazon-s3-buckets-92b739fa790
 * Rails 7 Environment Variables: https://web-crunch.com/posts/the-complete-guide-to-ruby-on-rails-encrypted-credentials
