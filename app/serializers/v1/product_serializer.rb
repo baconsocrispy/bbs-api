@@ -9,7 +9,7 @@ class V1::ProductSerializer
         byte_size: image.blob.byte_size,
         filename: image.blob.filename.to_s,
         id: image.blob.id,
-        url: Rails.application.routes.url_helpers.rails_blob_path(image, only_path: true)
+        url: Rails.application.routes.url_helpers.rails_blob_url(image)
       }
     end
   end

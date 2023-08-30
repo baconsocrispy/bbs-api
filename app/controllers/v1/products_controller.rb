@@ -1,5 +1,5 @@
 class V1::ProductsController < ApplicationController
-  # before_action :doorkeeper_authorize!, except: %i[ index show ]
+  before_action :doorkeeper_authorize!, except: %i[ index show ]
   before_action :set_product, only: %i[ show update destroy ]
 
   # GET /products
