@@ -1,5 +1,5 @@
 class V1::ProductsController < ApplicationController
-  before_action :doorkeeper_authorize!, except: %i[ index show ]
+  # before_action :doorkeeper_authorize!, except: %i[ index show ]
   before_action :set_product, only: %i[ show update destroy ]
 
   # GET /products
@@ -8,7 +8,7 @@ class V1::ProductsController < ApplicationController
 
     render json: {
       products: @products.map { |product|
-        serialize_product(product), include: [:product_images]
+        serialize_product(product)
       }, status: :ok
     }
   end
@@ -23,7 +23,7 @@ class V1::ProductsController < ApplicationController
     @product = Product.new(product_params)
 
     if @product.save
-      render json: serialize_product(@product), status: :created, location: @product
+      render json: serialize_product(@product), status: :created
     else
       render json: @product.errors, status: :unprocessable_entity
     end
