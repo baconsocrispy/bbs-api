@@ -4,7 +4,7 @@ class V1::CategoriesController < ApplicationController
 
   # GET /categories
   def index
-    @categories = Category.all.with_attached_category_images
+    @categories = Category.all
     render json: {
       categories: @categories.map { |category| 
         serialize_category(category)
