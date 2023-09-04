@@ -4,8 +4,12 @@ class V1::CategoriesController < ApplicationController
 
   # GET /categories
   def index
-    @categories = Category.all
-    render json: @categories
+    @categories = Category.all.with_attached_category_images
+    render json: {
+      categories: @categories.map { |category| 
+        serialize_category(category)
+      }
+    }, status: :ok
   end
 
   # GET /categories/1
@@ -18,7 +22,7 @@ class V1::CategoriesController < ApplicationController
     @category = Category.new(category_params)
 
     if @category.save
-      render json: @category, status: :created, location: @category
+      render json: serialize_category(@category), status: :created
     else
       render json: @category.errors, status: :unprocessable_entity
     end
@@ -46,7 +50,7 @@ class V1::CategoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def category_params
-      params.fetch(:category, {})
+      params.require(:category).permit(:name, :short_description, :category_image)
     end
 
     # serialize response

@@ -8,7 +8,6 @@ class V1::ProductSerializer
       {
         id: category.id,
         name: category.name,
-        imageUrl: category.image_url
       }
     end
   end
