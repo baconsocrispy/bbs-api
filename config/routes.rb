@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :groups
   # authentication routes
   use_doorkeeper do 
     controllers tokens: 'cookie_revoke'
@@ -8,8 +9,9 @@ Rails.application.routes.draw do
 
   # api
   concern :api_base do
-    resources :products
     resources :categories
+    resources :groups
+    resources :products
   end
   
   namespace :v1 do
