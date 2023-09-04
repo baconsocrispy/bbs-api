@@ -52,7 +52,7 @@ class V1::ProductsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def product_params
       params.require(:product)
-            .permit(:name, :short_description, product_images: [])
+            .permit(:name, :short_description, product_images: [], category_ids: [])
     end
 
     # serialize product
