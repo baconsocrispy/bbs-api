@@ -3,7 +3,7 @@ class V1::CategorySerializer
 
   set_type :category
   set_id :id
-  attributes :id, :category_image, :created_at, :name, :short_description, :slug
+  attributes :id, :created_at, :name, :short_description, :slug
 
   attributes :products do |object|
     object.products.map { |product| 
