@@ -179,6 +179,7 @@ end
 * seed db: `heroku run rails db:seed`
 * check logs: `heroku logs --tail`
 * Run console: `heroku run rails c`
+* If you get errors after migrating db, try running `heroku restart`
 
 ## AWS
 
