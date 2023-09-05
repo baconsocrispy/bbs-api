@@ -215,6 +215,12 @@ This decrypts the file and opens it up for editing in the VS Code editor
 
 * test variables work in rails console with: `Rails.application.credentials.aws`
 
+* to push credentials to Heroku:
+```
+heroku config:set RAILS_MASTER_KEY=`cat config/master.key`
+```
+
+
 ### Active Storage Setup
 * Install via: `rails active_storage:install`
 * Db migrate: `rails db:migrate`
