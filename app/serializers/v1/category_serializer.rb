@@ -5,9 +5,9 @@ class V1::CategorySerializer
   set_id :id
   attributes :id, :created_at, :name, :short_description, :slug
 
-  attributes :products do |object|
-    object.products.map { |product| 
-      V1::ProductSerializer.new(product).serializable_hash[:data][:attributes]
+  attributes :groups do |object|
+    object.groups.map { |group| 
+      V1::GroupSerializer.new(group).serializable_hash[:data][:attributes]
     }
   end
 

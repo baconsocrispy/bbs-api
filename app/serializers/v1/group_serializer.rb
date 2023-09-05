@@ -5,11 +5,11 @@ class V1::GroupSerializer
   set_id :id
   attributes :id, :created_at, :name, :short_description, :slug
 
-  attributes :products do |object|
-    object.products.map { |product| 
-      V1::ProductSerializer.new(product).serializable_hash[:data][:attributes]
-    }
-  end
+  # attributes :products do |object|
+  #   object.products.map { |product| 
+  #     V1::ProductSerializer.new(product).serializable_hash[:data][:attributes]
+  #   }
+  # end
 
   attributes :groupImage do |object|
     image = object.group_image
