@@ -27,6 +27,7 @@ Rails.application.configure do
   # config.asset_host = "http://assets.example.com"
 
   # config.routes.default_url_options[:host] = "https://bbs-api-v1-044032d0438d.herokuapp.com"
+  Rails.application.routes.default_url_options[:host] = 'bbs-api-v1-044032d0438d.herokuapp.com'
 
   # Specifies the header that your server uses for sending files.
   # config.action_dispatch.x_sendfile_header = "X-Sendfile" # for Apache
