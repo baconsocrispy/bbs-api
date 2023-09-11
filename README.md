@@ -200,9 +200,9 @@ end
 
 * in `config/environments/development.rb` and `config/environments/production.rb` set `config.active_storage.service = :amazon` instead of :local
 
-* To prevent active storage from replacing all attached images for a model when updating any one image, add the following line just below `config.active_storage.service = :amazon` in development and production environment files. 
+* For production environment, I needed to add the following in `production.rb` in order to get urls to generate with the correct default base url:
 
-`config.active_storage.replace_on_assign_to_many = false`
+`Rails.application.routes.default_url_options[:host] = 'bbs-api-v1-044032d0438d.herokuapp.com'`
 
 ### Storing Credentials
 
