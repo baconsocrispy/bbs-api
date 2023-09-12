@@ -11,8 +11,8 @@ class V1::CategorySerializer
     }
   end
 
-  attributes :categoryImage do |object|
-    image = object.category_image
+  attributes :image do |object|
+    image = object.image
     {
       byteSize: image.blob.byte_size,
       filename: image.blob.filename.to_s,
