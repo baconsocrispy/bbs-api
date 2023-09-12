@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_12_192421) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_12_222551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_12_192421) do
     t.bigint "category_id", null: false
     t.index ["category_id"], name: "index_groups_on_category_id"
     t.index ["name"], name: "index_groups_on_name", unique: true
+  end
+
+  create_table "hero_contents", force: :cascade do |t|
+    t.string "button_text", null: false
+    t.string "header_text", null: false
+    t.string "href", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "oauth_access_tokens", force: :cascade do |t|
