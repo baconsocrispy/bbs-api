@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_04_233535) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_12_171357) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -46,18 +46,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_233535) do
     t.string "name", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "slug"
+    t.string "slug", null: false
     t.string "short_description"
+    t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
   create_table "groups", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "short_description"
-    t.string "slug"
+    t.string "slug", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.bigint "category_id"
+    t.bigint "category_id", null: false
     t.index ["category_id"], name: "index_groups_on_category_id"
+    t.index ["name"], name: "index_groups_on_name", unique: true
   end
 
   create_table "oauth_access_tokens", force: :cascade do |t|
@@ -88,20 +90,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_233535) do
     t.index ["uid"], name: "index_oauth_applications_on_uid", unique: true
   end
 
-  create_table "product_categories", force: :cascade do |t|
-    t.bigint "product_id", null: false
-    t.bigint "category_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["category_id"], name: "index_product_categories_on_category_id"
-    t.index ["product_id"], name: "index_product_categories_on_product_id"
-  end
-
   create_table "products", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.text "short_description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "group_id", null: false
+    t.index ["group_id"], name: "index_products_on_group_id"
   end
 
   create_table "users", force: :cascade do |t|
@@ -123,6 +118,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_04_233535) do
   add_foreign_key "groups", "categories"
   add_foreign_key "oauth_access_tokens", "oauth_applications", column: "application_id"
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"
-  add_foreign_key "product_categories", "categories"
-  add_foreign_key "product_categories", "products"
+  add_foreign_key "products", "groups"
 end

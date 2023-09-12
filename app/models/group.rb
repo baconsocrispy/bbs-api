@@ -2,7 +2,10 @@ class Group < ApplicationRecord
   after_validation :set_slug, only: %i[ create update ]
 
   belongs_to :category
+  has_many :products, dependent: :destroy
   has_one_attached :group_image, dependent: :destroy
+
+  validates :name, presence: true, uniqueness: true
 
   # override default to_param method to use slug instead of id
   def to_param
