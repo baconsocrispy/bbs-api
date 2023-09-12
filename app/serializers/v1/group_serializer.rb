@@ -16,4 +16,10 @@ class V1::GroupSerializer
       }
     end
   end
+
+  attributes :products do |object|
+    object.products.map { |product|
+      V1::ProductSerializer.new(product).serializable_hash[:data][:attributes]
+    }
+  end
 end

@@ -15,6 +15,8 @@ class V1::ProductsController < ApplicationController
 
   # GET /products/1
   def show
+    p 'TEST'
+    p @product
     render json: serialize_product(@product), include: [:product_images]
   end
 
@@ -46,18 +48,17 @@ class V1::ProductsController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product
-      @product = Product.find(params[:id])
+      @product = Product.find_by(slug: params[:id])
     end
 
     # Only allow a list of trusted parameters through.
     def product_params
       params.require(:product)
-            .permit(category_ids: [],
-                    :default_image,
+            .permit(:default_image,
                     :group_id,
                     :name,
-                    product_images: [],
                     :short_description,
+                    product_images: []                 
                   )
     end
 
