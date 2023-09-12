@@ -12,12 +12,14 @@ class V1::CategorySerializer
   end
 
   attributes :image do |object|
-    image = object.image
-    {
-      byteSize: image.blob.byte_size,
-      filename: image.blob.filename.to_s,
-      id: image.blob.id,
-      url: Rails.application.routes.url_helpers.rails_blob_url(image)
-    }
+    image = object.category_image
+    if image.present?
+      {
+        byteSize: image.blob.byte_size,
+        filename: image.blob.filename.to_s,
+        id: image.blob.id,
+        url: Rails.application.routes.url_helpers.rails_blob_url(image)
+      }
+    end
   end
 end

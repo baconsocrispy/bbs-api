@@ -5,6 +5,8 @@ class V1::CategoriesController < ApplicationController
   # GET /categories
   def index
     @categories = Category.all
+    p 'TEST'
+    p serialize_category(@categories[0])
     render json: {
       categories: @categories.map { |category| 
         serialize_category(category)

@@ -5,7 +5,7 @@ class V1::GroupSerializer
   set_id :id
   attributes :id, :created_at, :name, :short_description, :slug
 
-  attributes :groupImage do |object|
+  attributes :image do |object|
     image = object.group_image
     if image.present?
       {

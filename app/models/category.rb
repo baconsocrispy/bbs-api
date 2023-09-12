@@ -5,7 +5,7 @@ class Category < ApplicationRecord
   has_many :product_categories
   has_many :products, through: :product_categories
 
-  has_one_attached :image, dependent: :destroy
+  has_one_attached :category_image, dependent: :destroy
 
   # override default to_param method to use slug instead of id
   def to_param
