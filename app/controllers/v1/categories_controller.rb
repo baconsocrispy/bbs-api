@@ -33,7 +33,7 @@ class V1::CategoriesController < ApplicationController
   # PATCH/PUT /categories/1
   def update
     if @category.update(category_params)
-      render json: @category
+      render json: serialize_category(@category)
     else
       render json: @category.errors, status: :unprocessable_entity
     end
@@ -52,7 +52,7 @@ class V1::CategoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def category_params
-      params.require(:category).permit(:name, :short_description, :category_image)
+      params.require(:category).permit(:name, :short_description, :category_image, :banner_image)
     end
 
     # serialize response

@@ -4,6 +4,7 @@ class Group < ApplicationRecord
   belongs_to :category
   has_many :products, dependent: :destroy
   has_one_attached :group_image, dependent: :destroy
+  has_one_attached :banner_image, dependent: :destroy
 
   validates :name, presence: true, uniqueness: true
 

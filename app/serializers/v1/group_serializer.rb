@@ -17,6 +17,18 @@ class V1::GroupSerializer
     end
   end
 
+  attributes :banner do |object|
+    image = object.banner_image
+    if image.present?
+      {
+        byteSize: image.blob.byte_size,
+        filename: image.blob.filename.to_s,
+        id: image.blob.id,
+        url: Rails.application.routes.url_helpers.rails_blob_url(image)
+      }
+    end
+  end
+
   attributes :products do |object|
     object.products.map { |product|
       V1::ProductSerializer.new(product).serializable_hash[:data][:attributes]
