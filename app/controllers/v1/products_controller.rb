@@ -57,6 +57,7 @@ class V1::ProductsController < ApplicationController
             .permit(:default_image,
                     :group_id,
                     :name,
+                    :slug,
                     :short_description,
                     product_images: []                 
                   )

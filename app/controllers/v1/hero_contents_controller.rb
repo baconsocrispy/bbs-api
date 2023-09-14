@@ -4,7 +4,7 @@ class V1::HeroContentsController < ApplicationController
 
   # GET /hero_contents
   def index
-    @hero_content = HeroContent.first
+    @hero_content = HeroContent.last
     render json: serialize_hero_content(@hero_content)
   end
 
