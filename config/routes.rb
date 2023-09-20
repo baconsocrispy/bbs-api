@@ -4,7 +4,6 @@ Rails.application.routes.draw do
     controllers tokens: 'cookie_revoke'
   end
 
- 
   get '/current_user', to: 'users/current_user#current_user'
 
   scope :users do
@@ -14,8 +13,8 @@ Rails.application.routes.draw do
   # api
   concern :api_base do
     resources :categories
-    resources :hero_contents
     resources :groups
+    resources :hero_contents
     resources :products
   end
   
