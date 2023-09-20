@@ -12,6 +12,8 @@ class Product < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  accepts_nested_attributes_for :features, allow_destroy: true
+
   # override default to_param method to use slug instead of id
   def to_param
     "#{ slug }"

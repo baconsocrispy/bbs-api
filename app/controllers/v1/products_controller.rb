@@ -60,7 +60,7 @@ class V1::ProductsController < ApplicationController
                     :name,
                     :slug,
                     :short_description,
-                    features: [],
+                    features_attributes: [ :highlight, :id, :text, :_destroy ],
                     product_images: [],
                     specs: [],
                     text_blocks: []
