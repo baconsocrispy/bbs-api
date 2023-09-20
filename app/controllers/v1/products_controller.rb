@@ -55,6 +55,7 @@ class V1::ProductsController < ApplicationController
     def product_params
       params.require(:product)
             .permit(:default_image,
+                    :features_header,
                     :group_id,
                     :name,
                     :slug,
