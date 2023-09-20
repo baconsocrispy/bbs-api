@@ -59,7 +59,10 @@ class V1::ProductsController < ApplicationController
                     :name,
                     :slug,
                     :short_description,
-                    product_images: []                 
+                    features: [],
+                    product_images: [],
+                    specs: [],
+                    text_blocks: []
                   )
     end
 
