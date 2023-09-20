@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_181635) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_182445) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -117,6 +117,16 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_181635) do
     t.index ["product_id"], name: "index_specs_on_product_id"
   end
 
+  create_table "text_blocks", force: :cascade do |t|
+    t.string "title"
+    t.string "text", null: false
+    t.integer "order"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "product_id", null: false
+    t.index ["product_id"], name: "index_text_blocks_on_product_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -138,4 +148,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_181635) do
   add_foreign_key "oauth_access_tokens", "users", column: "resource_owner_id"
   add_foreign_key "products", "groups"
   add_foreign_key "specs", "products"
+  add_foreign_key "text_blocks", "products"
 end
