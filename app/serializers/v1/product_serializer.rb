@@ -31,4 +31,10 @@ class V1::ProductSerializer
       }
     end
   end
+
+  attributes :specs do |object|
+    object.specs.map { |spec|
+      V1::SpecSerializer.new(spec).serializable_hash[:data][:attributes]
+    }
+  end
 end

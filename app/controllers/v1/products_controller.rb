@@ -61,7 +61,8 @@ class V1::ProductsController < ApplicationController
         product_images: [],
         specs: [],
         text_blocks: [],
-        features_attributes: [:id, :highlight, :text, :_destroy]
+        features_attributes: [ :id, :highlight, :text, :_destroy ],
+        specs_attributes: [ :id, :category, :text, :_destroy ]
       )
     end
 
