@@ -15,9 +15,7 @@ class V1::ProductsController < ApplicationController
 
   # GET /products/1
   def show
-    p 'TEST'
-    p @product
-    render json: serialize_product(@product), include: [:product_images]
+    render json: serialize_product(@product), include: [ :product_images ]
   end
 
   # POST /products
@@ -53,18 +51,18 @@ class V1::ProductsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def product_params
-      params.require(:product)
-            .permit(:default_image,
-                    :features_header,
-                    :group_id,
-                    :name,
-                    :slug,
-                    :short_description,
-                    features_attributes: [ :highlight, :id, :text, :_destroy ],
-                    product_images: [],
-                    specs: [],
-                    text_blocks: []
-                  )
+      params.require(:product).permit(
+        :default_image,
+        :features_header,
+        :group_id,
+        :name,
+        :slug,
+        :short_description,
+        product_images: [],
+        specs: [],
+        text_blocks: [],
+        features_attributes: [:id, :highlight, :text, :_destroy]
+      )
     end
 
     # serialize product

@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   after_validation :set_slug, only: %i[ create update ]
   
   belongs_to :group
-  has_many :features, dependent: :destroy
+  has_many :features, dependent: :destroy, inverse_of: :product
   has_many :specs, dependent: :destroy
   has_many :text_blocks, dependent: :destroy
 

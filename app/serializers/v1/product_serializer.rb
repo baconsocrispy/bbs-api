@@ -1,7 +1,13 @@
 class V1::ProductSerializer
   include JSONAPI::Serializer
 
-  attributes :id, :created_at, :features, :features_header, :name, :short_description, :slug, :specs, :text_blocks
+  attributes :id, :created_at, :features_header, :name, :short_description, :slug, :specs, :text_blocks
+
+  attributes :features do |object|
+    object.features.map { |feature|
+      V1::FeatureSerializer.new(feature).serializable_hash[:data][:attributes]
+    }
+  end
 
   attributes :image do |object|
     image = object.default_image
