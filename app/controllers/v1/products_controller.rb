@@ -22,7 +22,7 @@ class V1::ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
 
-    if @product.save
+    if @product.save!
       render json: serialize_product(@product), status: :created
     else
       render json: @product.errors, status: :unprocessable_entity
@@ -59,10 +59,9 @@ class V1::ProductsController < ApplicationController
         :slug,
         :short_description,
         product_images: [],
-        specs: [],
-        text_blocks: [],
         features_attributes: [ :id, :highlight, :text, :_destroy ],
-        specs_attributes: [ :id, :category, :text, :_destroy ]
+        specs_attributes: [ :id, :category, :text, :_destroy ],
+        text_blocks_attributes: [ :id, :text, :title, :_destroy ]
       )
     end
 

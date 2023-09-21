@@ -14,6 +14,7 @@ class Product < ApplicationRecord
 
   accepts_nested_attributes_for :features, allow_destroy: true
   accepts_nested_attributes_for :specs, allow_destroy: true
+  accepts_nested_attributes_for :text_blocks, allow_destroy: true
 
   # override default to_param method to use slug instead of id
   def to_param

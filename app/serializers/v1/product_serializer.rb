@@ -1,7 +1,7 @@
 class V1::ProductSerializer
   include JSONAPI::Serializer
 
-  attributes :id, :created_at, :features_header, :name, :short_description, :slug, :specs, :text_blocks
+  attributes :id, :created_at, :features_header, :name, :short_description, :slug
 
   attributes :features do |object|
     object.features.map { |feature|
@@ -35,6 +35,12 @@ class V1::ProductSerializer
   attributes :specs do |object|
     object.specs.map { |spec|
       V1::SpecSerializer.new(spec).serializable_hash[:data][:attributes]
+    }
+  end
+
+  attributes :textBlocks do |object|
+    object.text_blocks.map { |text_block|
+      V1::TextBlockSerializer.new(text_block).serializable_hash[:data][:attributes]
     }
   end
 end
