@@ -1,7 +1,11 @@
 class V1::ProductSerializer
   include JSONAPI::Serializer
 
-  attributes :id, :created_at, :features_header, :name, :short_description, :slug
+  attributes :id, :created_at, :name, :short_description, :slug
+
+  attributes :featuresHeader do |object|
+    object.features_header
+  end
 
   attributes :features do |object|
     object.features.map { |feature|
