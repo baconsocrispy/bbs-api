@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :groups
     resources :hero_contents
     resources :products
+    resources :contact, only: [ :create ]
   end
   
   namespace :v1 do
