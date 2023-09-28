@@ -1,10 +1,17 @@
 class V1::ContactController < ActionController::API
   def create
-    @user = User.new(user_params)
-    if @user.save!
-      render json: serialize_user(@user), status: :ok
-    else
-      render json: @user.errors, status: :unprocessable_entity
+    first_name = params[:first_name]
+    last_name = params[:last_name]
+    email = params[:email]
+    phone = params[:phone]
+    message = params[:message]
+
+    begin
+      ContactMailer.send_email(first_name, last_name, email, phone, message).deliver_now
+      render json: { success: true }, response: :ok
+    rescue => error
+      puts error
+      render json: { success: false }, response: :unprocessable_entity
     end
   end
 
