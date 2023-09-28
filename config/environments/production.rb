@@ -58,15 +58,15 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "bbs_api_production"
 
   config.action_mailer.perform_caching = false
-  
+
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
     address:              'smtpout.secureserver.net',
     port:                 25,
-    domain:               'rebeccaeddybacon.com',
-    user_name:            'rebecca@rebeccaeddybacon.com',
-    password:             'temp2020CB##',
+    domain:               Rails.application.credentials.mailer.domain,
+    user_name:            Rails.application.credentials.mailer.user_name,
+    password:             Rails.application.credentials.mailer.password,
     authentication:       :login,
     enable_starttls_auto: true,
     open_timeout:         5,
