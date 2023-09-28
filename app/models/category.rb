@@ -2,8 +2,10 @@ class Category < ApplicationRecord
   after_validation :set_slug, only: %i[ create update ]
 
   has_many :groups, dependent: :destroy
-  has_one_attached :category_image, dependent: :destroy
   has_one_attached :banner_image, dependent: :destroy
+  has_one_attached :category_image, dependent: :destroy
+  has_one_attached :pinned_image, dependent: :destroy
+
 
   validates :name, presence: true, uniqueness: true
   
