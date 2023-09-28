@@ -6,7 +6,7 @@ class V1::ProductSerializer
   attributes :featuresHeader do |object|
     object.features_header
   end
-
+  
   attributes :features do |object|
     object.features.map { |feature|
       V1::FeatureSerializer.new(feature).serializable_hash[:data][:attributes]

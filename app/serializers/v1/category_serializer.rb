@@ -5,12 +5,19 @@ class V1::CategorySerializer
   set_id :id
   attributes :id, :created_at, :name, :short_description, :slug
 
+  # format for frontend
+  attributes :tagLine do |object|
+    object.tag_line
+  end
+
+  # associations
   attributes :groups do |object|
     object.groups.map { |group| 
       V1::GroupSerializer.new(group).serializable_hash[:data][:attributes]
     }
   end
 
+  # image configuration
   attributes :image do |object|
     image = object.category_image
     if image.present?
@@ -22,6 +29,7 @@ class V1::CategorySerializer
       }
     end
   end
+
   attributes :banner do |object|
     image = object.banner_image
     if image.present?
@@ -33,6 +41,7 @@ class V1::CategorySerializer
       }
     end
   end
+
   attributes :pinned do |object|
     image = object.pinned_image
     if image.present?
