@@ -15,7 +15,11 @@ class V1::ProductsController < ApplicationController
 
   # GET /products/1
   def show
-    render json: serialize_product(@product), include: [ :product_images ]
+    if @product.present?
+      render json: serialize_product(@product), include: [ :product_images ]
+    else
+      render json: { message: 'Product does not exist' }, status: :unprocessable_entity
+    end
   end
 
   # POST /products
