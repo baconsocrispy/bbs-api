@@ -13,6 +13,10 @@ class V1::ProductSerializer
     }
   end
 
+  attributes :groupId do |object|
+    object.group_id
+  end
+
   attributes :image do |object|
     image = object.default_image
     if image.present?
