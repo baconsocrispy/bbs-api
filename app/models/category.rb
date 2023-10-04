@@ -9,9 +9,8 @@ class Category < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
   
+  scope :in_order, -> { order(order: :asc) }
   
-  
-
   # override default to_param method to use slug instead of id
   def to_param
     "#{ slug }"
