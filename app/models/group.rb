@@ -2,10 +2,11 @@ class Group < ApplicationRecord
   after_validation :set_slug, only: %i[ create update ]
 
   belongs_to :category
-  has_many :product_groupings
-  has_many :products, :through => :product_groupings
+  has_many :product_groupings, dependent: :destroy
   has_one_attached :group_image, dependent: :destroy
   has_one_attached :banner_image, dependent: :destroy
+
+  has_many :products, :through => :product_groupings
 
   validates :name, presence: true, uniqueness: true
 

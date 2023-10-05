@@ -1,11 +1,12 @@
 class Product < ApplicationRecord
   after_validation :set_slug, only: %i[ create update ]
   
-  has_many :groups, :through => :product_groupings
   has_many :features, dependent: :destroy, inverse_of: :product
-  has_many :product_groupings
+  has_many :product_groupings, dependent: :destroy
   has_many :specs, dependent: :destroy
   has_many :text_blocks, dependent: :destroy
+
+  has_many :groups, :through => :product_groupings
 
   # images
   has_one_attached :default_image, dependent: :destroy
