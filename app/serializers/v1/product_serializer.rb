@@ -13,8 +13,10 @@ class V1::ProductSerializer
     }
   end
 
-  attributes :groupId do |object|
-    object.group_id
+  attributes :productGroupings do |object|
+    object.product_groupings.map { |product_grouping|
+      V1::ProductGroupingSerializer.new(product_grouping).serializable_hash[:data][:attributes]
+    }
   end
 
   attributes :image do |object|

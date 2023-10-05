@@ -58,12 +58,12 @@ class V1::ProductsController < ApplicationController
       params.require(:product).permit(
         :default_image,
         :features_header,
-        :group_id,
         :name,
         :slug,
         :short_description,
         product_images: [],
         features_attributes: [ :id, :highlight, :text, :_destroy ],
+        product_groupings_attributes: [ :id, :group_id, :product_id, :_destroy ],
         specs_attributes: [ :id, :category, :text, :_destroy ],
         text_blocks_attributes: [ :id, :text, :title, :_destroy ]
       )

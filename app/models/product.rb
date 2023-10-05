@@ -1,8 +1,9 @@
 class Product < ApplicationRecord
   after_validation :set_slug, only: %i[ create update ]
   
-  belongs_to :group
+  has_many :groups, :through => :product_groupings
   has_many :features, dependent: :destroy, inverse_of: :product
+  has_many :product_groupings
   has_many :specs, dependent: :destroy
   has_many :text_blocks, dependent: :destroy
 
@@ -13,6 +14,7 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: true
 
   accepts_nested_attributes_for :features, allow_destroy: true
+  accepts_nested_attributes_for :product_groupings, allow_destroy: true
   accepts_nested_attributes_for :specs, allow_destroy: true
   accepts_nested_attributes_for :text_blocks, allow_destroy: true
 
