@@ -21,7 +21,7 @@ module CookieTokenResponseHelper
     cookie_args = [
       "access_token=#{ token.token }",
       'Path=/',
-      # 'HttpOnly'
+      'HttpOnly'
     ]
 
     if Rails.env.development?
