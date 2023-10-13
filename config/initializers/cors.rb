@@ -8,7 +8,11 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins "http://localhost:3000",
-            "https://superlative-fairy-8da059.netlify.app"
+            "https://superlative-fairy-8da059.netlify.app",
+            "http://carterbacon.com",
+            "https://carterbacon.com",
+            "http://www.carterbacon.com",
+            "https://www.carterbacon.com"
 
     resource "*",
       headers: :any,
