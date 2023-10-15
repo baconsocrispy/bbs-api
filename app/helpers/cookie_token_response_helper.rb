@@ -30,8 +30,9 @@ module CookieTokenResponseHelper
 
     # ensure secure parameter is set in production
     if Rails.env.production?
-      # cookie_args.push('Secure')
+      cookie_args.push('Secure')
       cookie_args.push('SameSite=Lax')
+      cookie_args.push('Domain=carterbacon.com')
     end
 
     # stringify the cookie args
