@@ -58,6 +58,7 @@ class V1::ProductsController < ApplicationController
       params.require(:product).permit(
         :default_image,
         :features_header,
+        :highlight,
         :name,
         :slug,
         :short_description,

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_19_194940) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_19_221747) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -50,6 +50,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_194940) do
     t.string "short_description"
     t.string "tag_line"
     t.integer "order"
+    t.string "title"
     t.index ["name"], name: "index_categories_on_name", unique: true
   end
 
@@ -70,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_194940) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "category_id", null: false
+    t.string "highlight"
     t.index ["category_id"], name: "index_groups_on_category_id"
     t.index ["name"], name: "index_groups_on_name", unique: true
   end
@@ -126,6 +128,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_194940) do
     t.datetime "updated_at", null: false
     t.string "slug", null: false
     t.string "features_header"
+    t.string "highlight"
   end
 
   create_table "specs", force: :cascade do |t|

@@ -52,9 +52,10 @@ class V1::GroupsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def group_params
       params.require(:group)
-            .permit(:name, 
+            .permit(:category_id, 
+                    :highlight,
+                    :name, 
                     :short_description, 
-                    :category_id, 
                     :group_image, 
                     :banner_image
                   )

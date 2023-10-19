@@ -3,7 +3,7 @@ class V1::GroupSerializer
 
   set_type :group
   set_id :id
-  attributes :id, :name, :short_description, :slug
+  attributes :id, :highlight, :name, :short_description, :slug
 
   attributes :createdAt do |object|
     object.created_at

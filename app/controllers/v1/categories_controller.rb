@@ -50,7 +50,14 @@ class V1::CategoriesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def category_params
-      params.require(:category).permit(:name, :short_description, :banner_image, :category_image, :pinned_image, :tag_line)
+      params.require(:category).permit(:name, 
+                                       :short_description, 
+                                       :tag_line, 
+                                       :title, 
+                                       :banner_image, 
+                                       :category_image, 
+                                       :pinned_image 
+                                      )
     end
 
     # serialize response
