@@ -1,6 +1,7 @@
 class Users::SignupController < ActionController::API
   before_action :doorkeeper_authorize!
 
+  # POST
   def create
     @user = User.new(user_params)
     if @user.save!

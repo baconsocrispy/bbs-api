@@ -3,7 +3,15 @@ class V1::GroupSerializer
 
   set_type :group
   set_id :id
-  attributes :id, :created_at, :name, :short_description, :slug
+  attributes :id, :name, :short_description, :slug
+
+  attributes :createdAt do |object|
+    object.created_at
+  end
+
+  attributes :categoryId do |object|
+    object.category_id
+  end
 
   attributes :image do |object|
     image = object.group_image

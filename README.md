@@ -156,6 +156,8 @@ end
 
 * Similarly, change `credentials: 'include'` to `credentials: 'same-site'` on the frontend fetch request when using the same domain
 
+* A hard-to-diagnose issue I encountered in production was the cookie not getting passed from a Next.js client component to a route handler in the request object, so it wasn't getting through to the backend. I learned I needed to explicitly add the domain attribute to the cookie. For example, `Domain=carterbacon.com`. By default, the browser will set the domain to the issuing domain, in this case api.carterbacon.com. When the request was made from carterbacon.com to api.carterbacon.com, the cookies was therefore not included. By setting it explicitly to the apex domain, the cookie will then be included in all requests from the apex AND subdomains like api.carterbacon.com
+
 * iOS browser apps (Chrome/Safari) are not setting the HttpOnly cookie, likely because the front/back end are on different domains. 
 
 * helpful tutorial: https://codingitwrong.com/2018/11/02/cookie-based-token-storage-with-doorkeeper.html
