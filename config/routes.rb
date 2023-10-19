@@ -13,10 +13,11 @@ Rails.application.routes.draw do
   # api
   concern :api_base do
     resources :categories
+    resources :contact, only: %i[ create ]
     resources :groups
     resources :hero_contents
     resources :products
-    resources :contact, only: %i[ create ]
+    resources :summaries
   end
   
   namespace :v1 do
