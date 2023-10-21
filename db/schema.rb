@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_19_221747) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_20_212241) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -145,6 +145,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_19_221747) do
     t.string "copy", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "banner_text"
   end
 
   create_table "text_blocks", force: :cascade do |t|

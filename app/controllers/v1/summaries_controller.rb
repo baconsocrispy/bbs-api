@@ -46,7 +46,7 @@ class V1::SummariesController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def summary_params
-      params.require(:summary).permit(:header, :copy)
+      params.require(:summary).permit(:banner_text, :copy, :header, :banner_image)
     end
 
     # serialize summary
