@@ -14,7 +14,8 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
             "http://www.carterbacon.com",
             "https://www.carterbacon.com",
             "http://api.carterbacon.com",
-            "https://api.carterbacon.com"
+            "https://api.carterbacon.com",
+            "https://bbs-app-drab.vercel.app"
 
     resource "*",
       headers: :any,
