@@ -10,6 +10,8 @@ class Group < ApplicationRecord
 
   validates :name, presence: true, uniqueness: true
 
+  scope :in_order, -> { order(sort_order: :asc) }
+
   # override default to_param method to use slug instead of id
   def to_param
     "#{ slug }"

@@ -12,7 +12,7 @@ class V1::CategorySerializer
 
   # associations
   attributes :groups do |object|
-    object.groups.map { |group| 
+    object.groups.in_order.map { |group| 
       V1::GroupSerializer.new(group).serializable_hash[:data][:attributes]
     }
   end
