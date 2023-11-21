@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_31_220533) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_21_203706) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -73,6 +73,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_31_220533) do
     t.bigint "category_id", null: false
     t.string "highlight"
     t.integer "sort_order"
+    t.boolean "no_link"
     t.index ["category_id"], name: "index_groups_on_category_id"
     t.index ["name"], name: "index_groups_on_name", unique: true
   end

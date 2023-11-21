@@ -5,6 +5,10 @@ class V1::GroupSerializer
   set_id :id
   attributes :id, :highlight, :name, :short_description, :slug
 
+  attributes :noLink do |object|
+    object.no_link
+  end
+
   attributes :createdAt do |object|
     object.created_at
   end

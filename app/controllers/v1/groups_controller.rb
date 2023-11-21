@@ -55,7 +55,8 @@ class V1::GroupsController < ApplicationController
             .permit(:category_id, 
                     :highlight,
                     :name, 
-                    :short_description, 
+                    :short_description,
+                    :no_link,
                     :group_image, 
                     :banner_image
                   )
