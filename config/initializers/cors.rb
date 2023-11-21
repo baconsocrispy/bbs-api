@@ -8,13 +8,12 @@
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
     origins "http://localhost:3000",
-            "https://superlative-fairy-8da059.netlify.app",
-            "http://carterbacon.com",
-            "https://carterbacon.com",
-            "http://www.carterbacon.com",
-            "https://www.carterbacon.com",
-            "http://api.carterbacon.com",
-            "https://api.carterbacon.com",
+            "http://brothers-sonsamerica.com",
+            "https://brothers-sonsamerica.com",
+            "http://www.brothers-sonsamerica.com",
+            "https://www.brothers-sonsamerica.com",
+            "http://api.brothers-sonsamerica.com",
+            "https://api.brothers-sonsamerica.com",
             "https://bbs-app-drab.vercel.app"
 
     resource "*",

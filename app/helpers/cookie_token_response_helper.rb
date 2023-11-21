@@ -32,7 +32,7 @@ module CookieTokenResponseHelper
     if Rails.env.production?
       cookie_args.push('Secure')
       cookie_args.push('SameSite=Lax')
-      cookie_args.push('Domain=carterbacon.com')
+      cookie_args.push('Domain=brothers-sonsamerica.com')
     end
 
     # stringify the cookie args
