@@ -60,12 +60,12 @@ Rails.application.configure do
   config.action_mailer.delivery_method = :smtp
 
   config.action_mailer.smtp_settings = {
-    address:              'smtpout.secureserver.net',
-    port:                 25,
+    address:              'smtp.gmail.com',
+    port:                 587,
     domain:               Rails.application.credentials.mailer.domain,
     user_name:            Rails.application.credentials.mailer.user_name,
     password:             Rails.application.credentials.mailer.password,
-    authentication:       :login,
+    authentication:       'plain',
     enable_starttls_auto: true,
     open_timeout:         5,
     read_timeout:         5 

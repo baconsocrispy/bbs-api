@@ -1,5 +1,5 @@
 class ContactMailer < ApplicationMailer
-  default from: 'rebecca@rebeccaeddybacon.com'
+  default from: 'info@brothers-sonsamerica.com'
 
   def send_email(first_name, last_name, email, phone, message)
     @first_name = first_name
@@ -9,7 +9,7 @@ class ContactMailer < ApplicationMailer
     @message = message
 
     mail(
-      to: 'erik_r@brothers-sonsamerica.com', 
+      to: 'carterbacon.code@gmail.com', 
       subject: 'BB&S America Website | New Contact Form Submission'
     )
     render 'send_email'
