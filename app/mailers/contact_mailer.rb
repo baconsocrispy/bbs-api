@@ -9,7 +9,7 @@ class ContactMailer < ApplicationMailer
     @message = message
 
     mail(
-      to: 'carterbacon.code@gmail.com', 
+      to: 'info@brothers-sonsamerica.com', 
       subject: 'BB&S America Website | New Contact Form Submission'
     )
     render 'send_email'
